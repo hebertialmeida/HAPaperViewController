@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1v0-uk-Egv">
-                                <rect key="frame" x="0.0" y="314" width="320" height="254"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="2" minimumInteritemSpacing="10" id="LjM-sd-HZm">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="2" minimumInteritemSpacing="10" id="LjM-sd-HZm" customClass="HACollectionViewSmallLayout">
                                     <size key="itemSize" width="142" height="254"/>
                                     <size key="headerReferenceSize" width="2" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -38,7 +38,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CC7-UM-j6E">
-                                    <rect key="frame" x="0.0" y="0.0" width="2" height="254"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="2" height="568"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>

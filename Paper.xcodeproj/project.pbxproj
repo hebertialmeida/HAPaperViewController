@@ -21,6 +21,8 @@
 		1AA0CC3A18A07EBC008F50F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC1C18A07EBC008F50F6 /* UIKit.framework */; };
 		1AA0CC4218A07EBC008F50F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AA0CC4018A07EBC008F50F6 /* InfoPlist.strings */; };
 		1AA0CC4418A07EBC008F50F6 /* PaperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC4318A07EBC008F50F6 /* PaperTests.m */; };
+		1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */; };
+		1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		1AA0CC3F18A07EBC008F50F6 /* PaperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PaperTests-Info.plist"; sourceTree = "<group>"; };
 		1AA0CC4118A07EBC008F50F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1AA0CC4318A07EBC008F50F6 /* PaperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaperTests.m; sourceTree = "<group>"; };
+		1AFA136B18A11E2400F2D2BF /* HACollectionViewSmallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewSmallLayout.h; sourceTree = "<group>"; };
+		1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewSmallLayout.m; sourceTree = "<group>"; };
+		1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewLargeLayout.h; sourceTree = "<group>"; };
+		1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewLargeLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,10 @@
 				1AA0CC2A18A07EBC008F50F6 /* Main.storyboard */,
 				1AA0CC2D18A07EBC008F50F6 /* HAViewController.h */,
 				1AA0CC2E18A07EBC008F50F6 /* HAViewController.m */,
+				1AFA136B18A11E2400F2D2BF /* HACollectionViewSmallLayout.h */,
+				1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */,
+				1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */,
+				1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */,
 				1AA0CC3018A07EBC008F50F6 /* Images.xcassets */,
 				1AA0CC1F18A07EBC008F50F6 /* Supporting Files */,
 			);
@@ -251,8 +261,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA0CC2F18A07EBC008F50F6 /* HAViewController.m in Sources */,
+				1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */,
 				1AA0CC2518A07EBC008F50F6 /* main.m in Sources */,
 				1AA0CC2918A07EBC008F50F6 /* HAAppDelegate.m in Sources */,
+				1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +473,7 @@
 				1AA0CC4918A07EBC008F50F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1AA0CC4A18A07EBC008F50F6 /* Build configuration list for PBXNativeTarget "PaperTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +482,7 @@
 				1AA0CC4C18A07EBC008F50F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

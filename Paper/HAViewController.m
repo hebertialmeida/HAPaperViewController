@@ -7,10 +7,17 @@
 //
 
 #import "HAViewController.h"
+#import "HACollectionViewSmallLayout.h"
+#import "HACollectionViewLargeLayout.h"
 
 @interface HAViewController ()
 
 @property (nonatomic) NSInteger status;
+@property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
+@property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
+
+@property (nonatomic, getter=isFullscreen) BOOL fullscreen;
 
 @end
 
@@ -22,6 +29,24 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     _status = 0;
+    _scale = 1.0;
+    
+    UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
+    [self.collectionView addGestureRecognizer:gesture];
+    
+    
+    self.smallLayout = [[HACollectionViewSmallLayout alloc] init];
+    self.largeLayout = [[HACollectionViewLargeLayout alloc] init];
+    
+//    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.smallLayout];
+//    [self.collectionView registerClass:[AFCollectionViewCell class] forCellWithReuseIdentifier:ItemIdentifier];
+//    self.collectionView.delegate = self;
+//    self.collectionView.dataSource = self;
+    
+    _collectionView.collectionViewLayout = _smallLayout;
+    _collectionView.clipsToBounds = NO;
+    _collectionView.backgroundColor = [UIColor blackColor];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,6 +55,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)didReceivePinchGesture:(UIPinchGestureRecognizer*)gesture
+{
+    NSLog(@"scale %f", gesture.scale);
+}
+
+///
+///
+///
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 20;
@@ -43,46 +77,54 @@
     
 //    cell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doSingleTap)];
-    singleTap.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:singleTap];
+//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doSingleTap)];
+//    singleTap.numberOfTapsRequired = 1;
+//    [self.view addGestureRecognizer:singleTap];
     
     return cell;
 }
 
-
-//
-- (void)doSingleTap
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Single tap");
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
-    [UIView transitionWithView:_collectionView duration:.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    if (_fullscreen) {
         
-        //any animateable attribute here.
+//        [UIView animateWithDuration:0.2 animations:^{
+//            self.view.transform = CGAffineTransformScale(self.view.transform, 1, 1);
+//        }];
         
-        if (_status == 0) {
-            _collectionView.frame = CGRectMake(0 , 0, 320, 568);
-            _status = 1;
-        } else {
-            _collectionView.frame = CGRectMake(0 , 314, 320, 254);
-            _status = 0;
-        }
+        _fullscreen = NO;
+        _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
+        [_collectionView setCollectionViewLayout:_smallLayout animated:YES completion:^(BOOL finished) {
+            NSLog(@"Finished small");
+        }];
+    }
+    else {
+//        [UIView animateWithDuration:0.2 animations:^{
+//            self.view.transform = CGAffineTransformScale(self.view.transform, 0.2, 0.2);
+//        }];
         
-    } completion:^(BOOL finished) {
-        //whatever you want to do upon completion
-    }];
+        _fullscreen = YES;
+        _collectionView.contentScaleFactor = 4;
+        _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+        
+        [_collectionView setCollectionViewLayout:_largeLayout animated:YES completion:^(BOOL finished) {
+            NSLog(@"Finished large");
+        }];
+    }
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSLog(@"resize");
-//    
-//    
-//    if (_status == 0) {
-//        return CGSizeMake(320, 568);
-//    } else {
-//        return CGSizeMake(142, 254);
-//    }
+////- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+////{
+////    NSLog(@"resize");
+////    
+////    
+////    if (_status == 0) {
+////        return CGSizeMake(320, 568);
+////    } else {
+////        return CGSizeMake(142, 254);
+////    }
 //}
 
 
