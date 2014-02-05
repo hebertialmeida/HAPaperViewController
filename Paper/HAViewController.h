@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, strong) NSArray *galleryImages;
 
 @end

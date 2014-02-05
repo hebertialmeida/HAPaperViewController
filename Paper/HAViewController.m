@@ -13,13 +13,14 @@
 
 @interface HAViewController ()
 
-@property (nonatomic) NSInteger status;
+@property (nonatomic) NSInteger slide;
 @property (nonatomic, assign) CGFloat scale;
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
 @property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
-
 @property (nonatomic, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, strong) UIImageView *topImage;
+@property (nonatomic, strong) UIImageView *reflected;
 
 @end
 
@@ -29,8 +30,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    _status = 0;
     _scale = 1.0;
     
     UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
@@ -64,46 +63,45 @@
     // Init mainView
     _mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mainView.clipsToBounds = YES;
-//    _mainView.backgroundColor = [UIColor redColor];
     _mainView.layer.cornerRadius = 4;
     [self.view insertSubview:_mainView belowSubview:_collectionView];
     
     // ImageView on top
-    UIImage *featuredImage = [UIImage imageNamed:@"Image"];
-    UIImageView *topImage = [[UIImageView alloc] initWithImage:featuredImage];
-    UIImageView *reflected = [[UIImageView alloc] initWithImage:featuredImage];
+    _topImage = [[UIImageView alloc] init];
+    _reflected = [[UIImageView alloc] init];
     
     // Reflected image
-    CGRect reflectedFrame = reflected.frame;
-    reflectedFrame.origin.y = CGRectGetHeight(topImage.bounds);
-//    reflectedFrame.size.height = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(topImage.bounds);
-    reflected.frame = reflectedFrame;
-    reflected.transform = CGAffineTransformMakeScale(1.0, -1.0);
-    [_mainView addSubview:reflected];
+    CGRect reflectedFrame = _reflected.frame;
+    reflectedFrame.origin.y = CGRectGetHeight(_topImage.bounds);
+    _reflected.frame = reflectedFrame;
+    _reflected.transform = CGAffineTransformMakeScale(1.0, -1.0);
+    [_mainView addSubview:_reflected];
     
     
     // Gradient image
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = topImage.bounds;
+    gradient.frame = _topImage.bounds;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4] CGColor],
                        (id)[[UIColor colorWithWhite:1.0 alpha: 0.0] CGColor],
                        nil];
-    [topImage.layer insertSublayer:gradient atIndex:0];
-    [_mainView addSubview:topImage];
+    [_topImage.layer insertSublayer:gradient atIndex:0];
+    [_mainView addSubview:_topImage];
     
     // Gradient reflected image
-    gradient.frame = reflected.bounds;
+    gradient.frame = _reflected.bounds;
     gradient.colors = [NSArray arrayWithObjects:
                        (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] CGColor],
                        (id)[[UIColor colorWithWhite:0.0 alpha: 0.0] CGColor],
                        nil];
-    [reflected.layer insertSublayer:gradient atIndex:0];
+    [_reflected.layer insertSublayer:gradient atIndex:0];
+    
     
     // Content perfect pixel
-    UIView *perfectPixelContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(topImage.bounds), 1)];
+    UIView *perfectPixelContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_topImage.bounds), 1)];
     perfectPixelContent.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
-    [topImage addSubview:perfectPixelContent];
+    [_topImage addSubview:perfectPixelContent];
+    
     
     // Label logo
     UILabel *logo = [[UILabel alloc] initWithFrame:CGRectMake(15, 16, 320, 30)];
@@ -119,8 +117,12 @@
     [logo.layer setShadowColor:[[UIColor blackColor] CGColor]];
     [logo.layer setShadowRadius:1.0];
     [logo.layer setShadowOpacity:0.6];
-
     [_mainView addSubview:logo];
+    
+    
+    _galleryImages = @[@"Image", @"Image1", @"Image2"];
+    _slide = 0;
+    [self changeSlide];
 }
 
 - (void)didReceiveMemoryWarning
@@ -197,6 +199,31 @@
             _mainView.transform = CGAffineTransformScale(transform, 0.96, 0.96);
         } completion:nil];
     }
+}
+
+
+//
+- (void)changeSlide
+{
+    if(_slide > _galleryImages.count)//an array count perhaps
+        _slide = 0;
+    
+    UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
+    
+    NSLog(@"image %@", _galleryImages[_slide]);
+    
+    [UIView transitionWithView:self.view
+                      duration:1.75f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{ _topImage.image = toImage;} completion:NULL];
+    _slide++;
+}
+
+//
+-(void)setTopImage:(UIImageView *)topImage
+{
+    NSLog(@"set image");
+    _reflected.image = topImage.image;
 }
 
 
