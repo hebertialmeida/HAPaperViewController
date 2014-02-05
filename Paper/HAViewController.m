@@ -45,14 +45,28 @@
     
     _collectionView.collectionViewLayout = _smallLayout;
     _collectionView.clipsToBounds = NO;
-    _collectionView.backgroundColor = [UIColor blackColor];
+    _collectionView.backgroundColor = [UIColor orangeColor];
     
+    // Shadow on collection
+//    [_collectionView setClipsToBounds:NO];
+    [_collectionView.layer setShadowOffset:CGSizeMake(0, 0)];
+    [_collectionView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [_collectionView.layer setShadowRadius:6.0];
+    [_collectionView.layer setShadowOpacity:0.5];
+    
+    // Improve shadow performance
+    CGPathRef path = [UIBezierPath bezierPathWithRect:_collectionView.bounds].CGPath;
+    [_collectionView.layer setShadowPath:path];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 
@@ -86,46 +100,27 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.collectionView.collectionViewLayout invalidateLayout];
+//    [self.collectionView.collectionViewLayout invalidateLayout];
     
     if (_fullscreen) {
-        
-//        [UIView animateWithDuration:0.2 animations:^{
-//            self.view.transform = CGAffineTransformScale(self.view.transform, 1, 1);
-//        }];
-        
         _fullscreen = NO;
         _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
-        [_collectionView setCollectionViewLayout:_smallLayout animated:YES completion:^(BOOL finished) {
-            NSLog(@"Finished small");
-        }];
+        
+        [_collectionView snapshotViewAfterScreenUpdates:YES];
+        
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [_collectionView setCollectionViewLayout:_smallLayout animated:YES];
+        } completion:nil];
     }
     else {
-//        [UIView animateWithDuration:0.2 animations:^{
-//            self.view.transform = CGAffineTransformScale(self.view.transform, 0.2, 0.2);
-//        }];
-        
         _fullscreen = YES;
-        _collectionView.contentScaleFactor = 4;
         _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         
-        [_collectionView setCollectionViewLayout:_largeLayout animated:YES completion:^(BOOL finished) {
-            NSLog(@"Finished large");
-        }];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [_collectionView setCollectionViewLayout:_largeLayout animated:YES];
+        } completion:nil];
     }
 }
-
-////- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-////{
-////    NSLog(@"resize");
-////    
-////    
-////    if (_status == 0) {
-////        return CGSizeMake(320, 568);
-////    } else {
-////        return CGSizeMake(142, 254);
-////    }
-//}
 
 
 

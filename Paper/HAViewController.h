@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerInteractiveTransitioning>
+@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerInteractiveTransitioning, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
