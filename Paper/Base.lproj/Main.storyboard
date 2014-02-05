@@ -47,7 +47,6 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.30588235289999999" green="0.59999999999999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="1v0-uk-Egv" id="zjI-Tn-GvD"/>

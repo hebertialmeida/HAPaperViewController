@@ -10,10 +10,12 @@
 #import "HACollectionViewSmallLayout.h"
 #import "HACollectionViewLargeLayout.h"
 
+
 @interface HAViewController ()
 
 @property (nonatomic) NSInteger status;
 @property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
 @property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
 
@@ -45,18 +47,80 @@
     
     _collectionView.collectionViewLayout = _smallLayout;
     _collectionView.clipsToBounds = NO;
-    _collectionView.backgroundColor = [UIColor orangeColor];
+    _collectionView.backgroundColor = [UIColor clearColor];
     
     // Shadow on collection
 //    [_collectionView setClipsToBounds:NO];
-    [_collectionView.layer setShadowOffset:CGSizeMake(0, 0)];
-    [_collectionView.layer setShadowColor:[[UIColor blackColor] CGColor]];
-    [_collectionView.layer setShadowRadius:6.0];
-    [_collectionView.layer setShadowOpacity:0.5];
+//    [_collectionView.layer setShadowOffset:CGSizeMake(0, 0)];
+//    [_collectionView.layer setShadowColor:[[UIColor blackColor] CGColor]];
+//    [_collectionView.layer setShadowRadius:6.0];
+//    [_collectionView.layer setShadowOpacity:0.5];
+//
+//    // Improve shadow performance
+//    CGPathRef path = [UIBezierPath bezierPathWithRect:_collectionView.bounds].CGPath;
+//    [_collectionView.layer setShadowPath:path];
     
-    // Improve shadow performance
-    CGPathRef path = [UIBezierPath bezierPathWithRect:_collectionView.bounds].CGPath;
-    [_collectionView.layer setShadowPath:path];
+    
+    // Init mainView
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+    _mainView.clipsToBounds = YES;
+//    _mainView.backgroundColor = [UIColor redColor];
+    _mainView.layer.cornerRadius = 4;
+    [self.view insertSubview:_mainView belowSubview:_collectionView];
+    
+    // ImageView on top
+    UIImage *featuredImage = [UIImage imageNamed:@"Image"];
+    UIImageView *topImage = [[UIImageView alloc] initWithImage:featuredImage];
+    UIImageView *reflected = [[UIImageView alloc] initWithImage:featuredImage];
+    
+    // Reflected image
+    CGRect reflectedFrame = reflected.frame;
+    reflectedFrame.origin.y = CGRectGetHeight(topImage.bounds);
+//    reflectedFrame.size.height = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(topImage.bounds);
+    reflected.frame = reflectedFrame;
+    reflected.transform = CGAffineTransformMakeScale(1.0, -1.0);
+    [_mainView addSubview:reflected];
+    
+    
+    // Gradient image
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = topImage.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4] CGColor],
+                       (id)[[UIColor colorWithWhite:1.0 alpha: 0.0] CGColor],
+                       nil];
+    [topImage.layer insertSublayer:gradient atIndex:0];
+    [_mainView addSubview:topImage];
+    
+    // Gradient reflected image
+    gradient.frame = reflected.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha: 0.0] CGColor],
+                       nil];
+    [reflected.layer insertSublayer:gradient atIndex:0];
+    
+    // Content perfect pixel
+    UIView *perfectPixelContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(topImage.bounds), 1)];
+    perfectPixelContent.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+    [topImage addSubview:perfectPixelContent];
+    
+    // Label logo
+    UILabel *logo = [[UILabel alloc] initWithFrame:CGRectMake(15, 16, 320, 30)];
+    logo.backgroundColor = [UIColor clearColor];
+    logo.textColor = [UIColor whiteColor];
+    logo.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+    logo.textAlignment = NSTextAlignmentLeft;
+    logo.text = @"Paper";
+    
+    // Label Shadow
+    [logo setClipsToBounds:NO];
+    [logo.layer setShadowOffset:CGSizeMake(0, 0)];
+    [logo.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [logo.layer setShadowRadius:1.0];
+    [logo.layer setShadowOpacity:0.6];
+
+    [_mainView addSubview:logo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,16 +172,29 @@
         
         [_collectionView snapshotViewAfterScreenUpdates:YES];
         
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            // Change flow layout
             [_collectionView setCollectionViewLayout:_smallLayout animated:YES];
+            _collectionView.backgroundColor = [UIColor clearColor];
+            
+            // Reset scale
+            _mainView.transform = CGAffineTransformMakeScale(1, 1);
         } completion:nil];
     }
     else {
         _fullscreen = YES;
         _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
         
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            // Change flow layout
             [_collectionView setCollectionViewLayout:_largeLayout animated:YES];
+            _collectionView.backgroundColor = [UIColor blackColor];
+            
+            // Transform to zoom in effect
+            CGAffineTransform transform = _mainView.transform;
+            _mainView.transform = CGAffineTransformScale(transform, 0.96, 0.96);
         } completion:nil];
     }
 }
