@@ -111,7 +111,7 @@
     logo.textColor = [UIColor whiteColor];
     logo.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
     logo.textAlignment = NSTextAlignmentLeft;
-    logo.text = @"Paper";
+    logo.text = @"Paper by Heberti";
     
     // Label Shadow
     [logo setClipsToBounds:NO];
