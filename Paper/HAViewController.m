@@ -31,6 +31,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     _scale = 1.0;
+    _galleryImages = @[@"Image", @"Image1", @"Image2", @"Image3"];
+    _slide = 1;
     
     UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
     [self.collectionView addGestureRecognizer:gesture];
@@ -67,34 +69,33 @@
     [self.view insertSubview:_mainView belowSubview:_collectionView];
     
     // ImageView on top
-    _topImage = [[UIImageView alloc] init];
-    _reflected = [[UIImageView alloc] init];
+    _topImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_galleryImages[_slide]]];
+    _reflected = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_galleryImages[_slide]]];
+    [_mainView addSubview:_topImage];
+    [_mainView addSubview:_reflected];
+    
     
     // Reflected image
     CGRect reflectedFrame = _reflected.frame;
     reflectedFrame.origin.y = CGRectGetHeight(_topImage.bounds);
     _reflected.frame = reflectedFrame;
-    _reflected.transform = CGAffineTransformMakeScale(1.0, -1.0);
-    [_mainView addSubview:_reflected];
+    _reflected.transform = CGAffineTransformMakeScale(1.0, -1.0); // Reflect image
     
     
-    // Gradient image
+    // Gradient top image
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = _topImage.bounds;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4] CGColor],
-                       (id)[[UIColor colorWithWhite:1.0 alpha: 0.0] CGColor],
-                       nil];
+    gradient.colors = @[(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor],
+                        (id)[[UIColor colorWithWhite:0 alpha:0] CGColor]];
     [_topImage.layer insertSublayer:gradient atIndex:0];
-    [_mainView addSubview:_topImage];
+    
     
     // Gradient reflected image
-    gradient.frame = _reflected.bounds;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] CGColor],
-                       (id)[[UIColor colorWithWhite:0.0 alpha: 0.0] CGColor],
-                       nil];
-    [_reflected.layer insertSublayer:gradient atIndex:0];
+    CAGradientLayer *gradientReflected = [CAGradientLayer layer];
+    gradientReflected.frame = _reflected.bounds;
+    gradientReflected.colors = @[(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:1] CGColor],
+                                 (id)[[UIColor colorWithWhite:0 alpha:0] CGColor]];
+    [_reflected.layer insertSublayer:gradientReflected atIndex:0];
     
     
     // Content perfect pixel
@@ -120,9 +121,10 @@
     [_mainView addSubview:logo];
     
     
-    _galleryImages = @[@"Image", @"Image1", @"Image2"];
-    _slide = 0;
-    [self changeSlide];
+
+    // Loop gallery - fix loop: http://bynomial.com/blog/?p=67
+    NSTimer *timer = [NSTimer timerWithTimeInterval:5.0f target:self selector:@selector(changeSlide) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -205,26 +207,27 @@
 //
 - (void)changeSlide
 {
-    if(_slide > _galleryImages.count)//an array count perhaps
+    if(_slide > _galleryImages.count-1)//an array count perhaps
         _slide = 0;
     
     UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
-    
-    NSLog(@"image %@", _galleryImages[_slide]);
-    
-    [UIView transitionWithView:self.view
-                      duration:1.75f
+    [UIView transitionWithView:_mainView
+                      duration:1.0f
                        options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{ _topImage.image = toImage;} completion:NULL];
+                    animations:^{
+                        _topImage.image = toImage;
+                        _reflected.image = toImage;
+                    } completion:NULL];
     _slide++;
 }
 
 //
--(void)setTopImage:(UIImageView *)topImage
-{
-    NSLog(@"set image");
-    _reflected.image = topImage.image;
-}
+//-(void)setTopImage:(UIImageView *)topImage
+//{
+//    NSLog(@"set image");
+//    _reflected.image = [UIImage imageNamed:_galleryImages[_slide]];
+//    _topImage.image = [UIImage imageNamed:_galleryImages[_slide]];
+//}
 
 
 
