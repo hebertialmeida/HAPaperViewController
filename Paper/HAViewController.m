@@ -102,13 +102,12 @@
     
     
     // Label logo
-    UILabel *logo = [[UILabel alloc] initWithFrame:CGRectMake(15, 16, 320, 30)];
+    UILabel *logo = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, 290, 0)];
     logo.backgroundColor = [UIColor clearColor];
     logo.textColor = [UIColor whiteColor];
     logo.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
-    logo.textAlignment = NSTextAlignmentLeft;
-    logo.text = @"Paper by Heberti";
-    
+    logo.text = @"Paper";
+    [logo sizeToFit];
     // Label Shadow
     [logo setClipsToBounds:NO];
     [logo.layer setShadowOffset:CGSizeMake(0, 0)];
@@ -116,6 +115,40 @@
     [logo.layer setShadowRadius:1.0];
     [logo.layer setShadowOpacity:0.6];
     [_mainView addSubview:logo];
+    
+    
+    // Label Title
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, logo.frame.origin.y + CGRectGetHeight(logo.frame) + 8, 290, 0)];
+    title.backgroundColor = [UIColor clearColor];
+    title.textColor = [UIColor whiteColor];
+    title.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    title.text = @"Heberti Almeida";
+    [title sizeToFit];
+    // Label Shadow
+    [title setClipsToBounds:NO];
+    [title.layer setShadowOffset:CGSizeMake(0, 0)];
+    [title.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [title.layer setShadowRadius:1.0];
+    [title.layer setShadowOpacity:0.6];
+    [_mainView addSubview:title];
+    
+    
+    // Label SubTitle
+    UILabel *subTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, title.frame.origin.y + CGRectGetHeight(title.frame), 290, 0)];
+    subTitle.backgroundColor = [UIColor clearColor];
+    subTitle.textColor = [UIColor whiteColor];
+    subTitle.font = [UIFont fontWithName:@"Helvetica" size:13];
+    subTitle.text = @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
+    subTitle.lineBreakMode = NSLineBreakByWordWrapping;
+    subTitle.numberOfLines = 0;
+    [subTitle sizeToFit];
+    // Label Shadow
+    [subTitle setClipsToBounds:NO];
+    [subTitle.layer setShadowOffset:CGSizeMake(0, 0)];
+    [subTitle.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [subTitle.layer setShadowRadius:1.0];
+    [subTitle.layer setShadowOpacity:0.6];
+    [_mainView addSubview:subTitle];
     
     
     // First Load
@@ -148,6 +181,10 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     cell.layer.cornerRadius = 4;
+    
+    
+    UIImageView *backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cell"]];
+    cell.backgroundView = backgroundView;
     
     return cell;
 }
@@ -192,17 +229,19 @@
 #pragma mark - Change slider
 - (void)changeSlide
 {
-    if(_slide > _galleryImages.count-1) _slide = 0;
-    
-    UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
-    [UIView transitionWithView:_mainView
-                      duration:0.6f
-                       options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationCurveEaseInOut
-                    animations:^{
-                        _topImage.image = toImage;
-                        _reflected.image = toImage;
-                    } completion:NULL];
-    _slide++;
+    if (_fullscreen == NO) {
+        if(_slide > _galleryImages.count-1) _slide = 0;
+        
+        UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
+        [UIView transitionWithView:_mainView
+                          duration:0.6f
+                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationCurveEaseInOut
+                        animations:^{
+                            _topImage.image = toImage;
+                            _reflected.image = toImage;
+                        } completion:NULL];
+        _slide++;
+    }
 }
 
 
