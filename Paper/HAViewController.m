@@ -13,14 +13,13 @@
 
 @interface HAViewController ()
 
-@property (nonatomic) NSInteger slide;
-@property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, assign) NSInteger slide;
 @property (nonatomic, strong) UIView *mainView;
+@property (nonatomic, strong) UIImageView *topImage;
+@property (nonatomic, strong) UIImageView *reflected;
 @property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
 @property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
 @property (nonatomic, getter=isFullscreen) BOOL fullscreen;
-@property (nonatomic, strong) UIImageView *topImage;
-@property (nonatomic, strong) UIImageView *reflected;
 
 @end
 
@@ -30,14 +29,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    _scale = 1.0;
     _galleryImages = @[@"Image", @"Image1", @"Image2", @"Image3", @"Image4"];
-    _slide = 1;
+    _slide = 0;
     
     UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
     [self.collectionView addGestureRecognizer:gesture];
     
-    
+    // Custom layouts
     self.smallLayout = [[HACollectionViewSmallLayout alloc] init];
     self.largeLayout = [[HACollectionViewLargeLayout alloc] init];
     
@@ -69,20 +67,19 @@
     [self.view insertSubview:_mainView belowSubview:_collectionView];
     
     // ImageView on top
-    _topImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_galleryImages[_slide]]];
-    _reflected = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_galleryImages[_slide]]];
+    _topImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+    _reflected = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_topImage.bounds), 320, 320)];
+//    _topImage.contentMode = UIViewContentModeScaleAspectFill;
+//    _reflected.contentMode = UIViewContentModeScaleAspectFill;
     [_mainView addSubview:_topImage];
     [_mainView addSubview:_reflected];
     
     
-    // Reflected image
-    CGRect reflectedFrame = _reflected.frame;
-    reflectedFrame.origin.y = CGRectGetHeight(_topImage.bounds);
-    _reflected.frame = reflectedFrame;
-    _reflected.transform = CGAffineTransformMakeScale(1.0, -1.0); // Reflect image
+    // Reflect imageView
+    _reflected.transform = CGAffineTransformMakeScale(1.0, -1.0);
     
     
-    // Gradient top image
+    // Gradient to top image
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = _topImage.bounds;
     gradient.colors = @[(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] CGColor],
@@ -90,7 +87,7 @@
     [_topImage.layer insertSublayer:gradient atIndex:0];
     
     
-    // Gradient reflected image
+    // Gradient to reflected image
     CAGradientLayer *gradientReflected = [CAGradientLayer layer];
     gradientReflected.frame = _reflected.bounds;
     gradientReflected.colors = @[(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:1] CGColor],
@@ -121,18 +118,15 @@
     [_mainView addSubview:logo];
     
     
-
+    // First Load
+    [self changeSlide];
+    
     // Loop gallery - fix loop: http://bynomial.com/blog/?p=67
     NSTimer *timer = [NSTimer timerWithTimeInterval:5.0f target:self selector:@selector(changeSlide) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+#pragma mark - Hide StatusBar
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -143,9 +137,7 @@
     NSLog(@"scale %f", gesture.scale);
 }
 
-///
-///
-///
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 20;
@@ -157,19 +149,12 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.layer.cornerRadius = 4;
     
-//    cell.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doSingleTap)];
-//    singleTap.numberOfTapsRequired = 1;
-//    [self.view addGestureRecognizer:singleTap];
-    
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-    
     if (_fullscreen) {
         _fullscreen = NO;
         _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -204,31 +189,21 @@
 }
 
 
-//
+#pragma mark - Change slider
 - (void)changeSlide
 {
-    if(_slide > _galleryImages.count-1)//an array count perhaps
-        _slide = 0;
+    if(_slide > _galleryImages.count-1) _slide = 0;
     
     UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
     [UIView transitionWithView:_mainView
-                      duration:1.0f
-                       options:UIViewAnimationOptionTransitionCrossDissolve
+                      duration:0.6f
+                       options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationCurveEaseInOut
                     animations:^{
                         _topImage.image = toImage;
                         _reflected.image = toImage;
                     } completion:NULL];
     _slide++;
 }
-
-//
-//-(void)setTopImage:(UIImageView *)topImage
-//{
-//    NSLog(@"set image");
-//    _reflected.image = [UIImage imageNamed:_galleryImages[_slide]];
-//    _topImage.image = [UIImage imageNamed:_galleryImages[_slide]];
-//}
-
 
 
 @end
