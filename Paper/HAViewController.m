@@ -31,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     _scale = 1.0;
-    _galleryImages = @[@"Image", @"Image1", @"Image2", @"Image3"];
+    _galleryImages = @[@"Image", @"Image1", @"Image2", @"Image3", @"Image4"];
     _slide = 1;
     
     UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
