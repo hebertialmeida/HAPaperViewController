@@ -20,6 +20,7 @@
 @property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
 @property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
 @property (nonatomic, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, getter=isTransition) BOOL transition;
 
 @end
 
@@ -159,16 +160,19 @@
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
+
 #pragma mark - Hide StatusBar
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
 
+#pragma mark - UIPinchGestureRecognizer
 - (void)didReceivePinchGesture:(UIPinchGestureRecognizer*)gesture
 {
     NSLog(@"scale %f", gesture.scale);
 }
+
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -189,9 +193,13 @@
     return cell;
 }
 
+
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Start transition
+    _transition = YES;
+    
     if (_fullscreen) {
         _fullscreen = NO;
         _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -206,7 +214,9 @@
             
             // Reset scale
             _mainView.transform = CGAffineTransformMakeScale(1, 1);
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            _transition = NO;
+        }];
     }
     else {
         _fullscreen = YES;
@@ -221,7 +231,9 @@
             // Transform to zoom in effect
             CGAffineTransform transform = _mainView.transform;
             _mainView.transform = CGAffineTransformScale(transform, 0.96, 0.96);
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            _transition = NO;
+        }];
     }
 }
 
@@ -229,7 +241,7 @@
 #pragma mark - Change slider
 - (void)changeSlide
 {
-    if (_fullscreen == NO) {
+    if (_fullscreen == NO && _transition == NO) {
         if(_slide > _galleryImages.count-1) _slide = 0;
         
         UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
@@ -239,7 +251,7 @@
                         animations:^{
                             _topImage.image = toImage;
                             _reflected.image = toImage;
-                        } completion:NULL];
+                        } completion:nil];
         _slide++;
     }
 }

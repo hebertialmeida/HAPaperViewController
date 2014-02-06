@@ -11,7 +11,8 @@
 @interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
 @property (nonatomic, strong) NSArray *galleryImages;
+@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, readonly, getter=isTransition) BOOL transition;
 
 @end
