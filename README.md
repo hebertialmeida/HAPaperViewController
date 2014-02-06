@@ -3,15 +3,15 @@ HAPaperViewController
 
 UICollectionView with layout transitions inspired by Facebook Paper App
 
+![Demo HATransparentView](https://raw.github.com/hebertialmeida/HAPaperViewController/master/Paper/Images.xcassets/1.png)
 
 ## Contact me
 
 **Heberti Almeida**  
 
 
-Contact: [hebertialmeida@gmail.com][1]
-
-Twitter: [http://twitter.com/hebertialmeida][2] 
+* Contact: [hebertialmeida@gmail.com][1]
+* Twitter: [http://twitter.com/hebertialmeida][2] 
 
   [1]: mailto:hebertialmeida@gmail.com
   [2]: http://twitter.com/hebertialmeida
