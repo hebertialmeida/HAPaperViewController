@@ -5,6 +5,11 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 
 ![Demo HAPaperViewController](https://raw.github.com/hebertialmeida/HAPaperViewController/master/Paper/Images.xcassets/paper.gif)
 
+## Todo
+* Add some shadow
+* Gestures to change layout
+* Performance improvement
+
 ## Contact me
 
 **Heberti Almeida**  
