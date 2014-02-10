@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
+@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *galleryImages;
 @property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
-@property (nonatomic, readonly, getter=isTransition) BOOL transition;
+@property (nonatomic, readonly, getter=isTransitioning) BOOL transitioning;
 
 @end
