@@ -12,8 +12,7 @@
 #import "TLTransitionLayout.h"
 
 #define kTransitionSpeed 0.02f
-
-static const CGFloat kLargeLayoutScale = 2.5;
+#define kLargeLayoutScale 2.5F
 
 @interface HAViewController ()
 
@@ -297,11 +296,18 @@ static const CGFloat kLargeLayoutScale = 2.5;
 - (void)handlePinch:(UIPinchGestureRecognizer *)pinch
 {
     if (pinch.state == UIGestureRecognizerStateBegan && !_transitionLayout) {
+        NSLog(@"UIGestureRecognizerStateBegan");
         
         // remember initial scale factor for progress calculation
         _initialScale = pinch.scale;
         
         UICollectionViewLayout *toLayout = _smallLayout == _collectionView.collectionViewLayout ? _largeLayout : _smallLayout;
+        
+        if (toLayout == _smallLayout) {
+            _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
+        } else {
+            _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+        }
         
         _transitionLayout = (TLTransitionLayout *)[_collectionView startInteractiveTransitionToCollectionViewLayout:toLayout completion:^(BOOL completed, BOOL finish) {
             if (finish) {
@@ -312,6 +318,7 @@ static const CGFloat kLargeLayoutScale = 2.5;
             self.transitionLayout = nil;
         }];
         
+//        NSArray *visibleIndexPaths = [_collectionView indexPathsForVisibleItems];
         NSArray *visiblePoses = [_collectionView.collectionViewLayout layoutAttributesForElementsInRect:_collectionView.bounds];
         NSMutableArray *visibleIndexPaths = [NSMutableArray arrayWithCapacity:visiblePoses.count];
         for (UICollectionViewLayoutAttributes *pose in visiblePoses) {
@@ -322,20 +329,25 @@ static const CGFloat kLargeLayoutScale = 2.5;
     }
     
     else if (pinch.state == UIGestureRecognizerStateChanged && _transitionLayout && pinch.numberOfTouches > 1) {
-        
+        NSLog(@"UIGestureRecognizerStateChanged");
         CGFloat finalScale = _transitionLayout.nextLayout == _largeLayout ? kLargeLayoutScale : 1 / kLargeLayoutScale;
         _transitionLayout.transitionProgress = transitionProgress(_initialScale, pinch.scale, finalScale, TLTransitioningEasingLinear);
     }
-    else if (pinch.state == UIGestureRecognizerStateEnded) {
+//    else if (pinch.state == UIGestureRecognizerStateEnded) {
 //    else {
-//    else if (pinch.state == UIGestureRecognizerStateEnded && _transitionLayout) {
-        
+    else if (pinch.state == UIGestureRecognizerStateEnded && _transitionLayout) {
+        NSLog(@"UIGestureRecognizerStateEnded");
         if (_transitionLayout.transitionProgress > 0.3) {
             [_collectionView finishInteractiveTransition];
         } else {
             [_collectionView cancelInteractiveTransition];
         }
         
+    }
+    
+    else {
+        NSLog(@"UIGestureRecognizerStateCancelled");
+        return;
     }
 }
 
@@ -351,9 +363,9 @@ static const CGFloat kLargeLayoutScale = 2.5;
 //}
 
 
-//#pragma mark - UIViewControllerTransitioningDelegate
-//- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
-//    return 0.4f;
-//}
+#pragma mark - UIViewControllerTransitioningDelegate
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
+    return 0.3f;
+}
 
 @end
