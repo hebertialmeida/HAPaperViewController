@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
+@interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate/*, UIViewControllerTransitioningDelegate*/>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *galleryImages;
