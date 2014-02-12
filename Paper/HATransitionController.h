@@ -13,7 +13,7 @@
 @end
 
 
-@interface HATransitionController : NSObject  <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning>
+@interface HATransitionController : NSObject  <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning, UIGestureRecognizerDelegate>
 
 @property (nonatomic) id <HATransitionControllerDelegate> delegate;
 @property (nonatomic) BOOL hasActiveInteraction;

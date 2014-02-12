@@ -31,14 +31,26 @@
         //  pinch in closes photos down into a stack,
         //  pinch out expands the photos intoa  grid
         //
-        UIPinchGestureRecognizer *pinchGesture =
-        [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+        UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
         [collectionView addGestureRecognizer:pinchGesture];
+        
+        UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerGesture:)];
+        panGestureRecognizer.delegate = self;
+        panGestureRecognizer.minimumNumberOfTouches = 1;
+        panGestureRecognizer.maximumNumberOfTouches = 1;
+        [collectionView addGestureRecognizer:panGestureRecognizer];
         
         self.collectionView = collectionView;
     }
     return self;
 }
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
@@ -80,6 +92,16 @@
         ((progress != self.transitionLayout.transitionProgress) || !UIOffsetEqualToOffset(offset, self.transitionLayout.offset)))
     {
         [self.transitionLayout setOffset:offset];
+        [self.transitionLayout setTransitionProgress:progress];
+        [self.transitionLayout invalidateLayout];
+        [self.context updateInteractiveTransition:progress];
+    }
+}
+
+- (void)updateWithProgress:(CGFloat)progress
+{
+    if (self.context != nil && ((progress != self.transitionLayout.transitionProgress)))
+    {
         [self.transitionLayout setTransitionProgress:progress];
         [self.transitionLayout invalidateLayout];
         [self.context updateInteractiveTransition:progress];
@@ -180,56 +202,12 @@
     }
 }
 
-//-(void)handlePinch:(UIPinchGestureRecognizer*)pinch
-//{
-//    if (pinch.state == UIGestureRecognizerStateCancelled) {
-//        [self endInteractionWithSuccess:FALSE];
-//        return;
-//    }
-//    if (pinch.state == UIGestureRecognizerStateEnded) {
-//        [self endInteractionWithSuccess:TRUE];
-//        return;
-//    }
-//    
-//    if (pinch.numberOfTouches < 2)
-//        return;
-//
-//    CGPoint point1 = [pinch locationOfTouch:0 inView:pinch.view];
-//    CGPoint point2 = [pinch locationOfTouch:1 inView:pinch.view];
-//    CGFloat distance = sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
-//    CGPoint point = [pinch locationInView:pinch.view];
-//    if (pinch.state == UIGestureRecognizerStateBegan) {
-//        if (self.hasActiveInteraction)
-//            return;
-//        self.initialScale = pinch.scale;
-//        self.initialPinchDistance = distance;
-//        self.initialPinchPoint = point;
-//        self.hasActiveInteraction = TRUE;
-//        [self.delegate interactionBeganAtPoint:point];
-//        return;
-//    }
-//    if (!self.hasActiveInteraction)
-//    {
-//        return;
-//    }
-//    
-//    if (pinch.state == UIGestureRecognizerStateChanged)
-//    {
-//        CGFloat delta = distance - self.initialPinchDistance;
-//        CGFloat offsetX = point.x - self.initialPinchPoint.x;
-//        CGFloat offsetY = (point.y - self.initialPinchPoint.y) + delta/M_PI;
-//        UIOffset offsetToUse = UIOffsetMake(offsetX, offsetY);
-//        
-//        CGFloat distanceDelta = distance - self.initialPinchDistance;
-//        if (self.navigationOperation == UINavigationControllerOperationPop) {
-//            distanceDelta = -distanceDelta;
-//        }
-//
-//        CGFloat progress = MAX(MIN(((distanceDelta + pinch.velocity * M_PI) / 250), 1.0), 0.0);
-//        [self updateWithProgress:progress andOffset:offsetToUse];
-//        return;
-//    }
-//}
+- (void)oneFingerGesture:(UIPanGestureRecognizer *)sender
+{
+        CGPoint point = [sender locationInView:sender.view];
+        NSLog(@"point.x %f", point.x);
+        NSLog(@"point.y %f", point.y);
+}
 
 
 @end
