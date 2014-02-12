@@ -23,9 +23,9 @@
     return self;
 }
 
-//- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
-//{
-//    return YES;
-//}
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
+{
+    return YES;
+}
 
 @end

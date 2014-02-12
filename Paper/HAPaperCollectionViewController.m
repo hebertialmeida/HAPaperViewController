@@ -45,12 +45,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_ID forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CELL_ID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     cell.layer.cornerRadius = 4;
+    cell.clipsToBounds = YES;
     
-//    UIImageView *backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cell"]];
-//    cell.backgroundView = backgroundView;
+    UIImageView *backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cell"]];
+    cell.backgroundView = backgroundView;
     
     return cell;
 }
@@ -80,12 +81,12 @@
     return transitionLayout;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.collectionView.decelerationRate = [self.collectionView.collectionViewLayout isKindOfClass:[HACollectionViewLargeLayout class]] ? UIScrollViewDecelerationRateNormal : UIScrollViewDecelerationRateFast;
-}
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    
+//    self.collectionView.decelerationRate = [self.collectionView.collectionViewLayout isKindOfClass:[HACollectionViewLargeLayout class]] ? UIScrollViewDecelerationRateNormal : UIScrollViewDecelerationRateFast;
+//}
 
 - (void)viewDidLoad
 {

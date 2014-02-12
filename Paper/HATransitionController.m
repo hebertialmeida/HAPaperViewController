@@ -113,6 +113,8 @@
 
 -(void)handlePinch:(UIPinchGestureRecognizer*)sender
 {
+    NSLog(@"gesture %d", sender.state);
+    
     if (sender.state == UIGestureRecognizerStateEnded)
     {
         [self endInteractionWithSuccess:TRUE];
@@ -173,7 +175,7 @@
         
         CGFloat dimension = sqrt(CGRectGetWidth(self.collectionView.bounds) * CGRectGetWidth(self.collectionView.bounds) + CGRectGetHeight(self.collectionView.bounds) * CGRectGetHeight(self.collectionView.bounds));
         
-        CGFloat progress = MAX(MIN((distanceDelta / 400), 1.0), 0.0);
+        CGFloat progress = MAX(MIN((distanceDelta / dimension), 1.0), 0.0);
         [self updateWithProgress:progress andOffset:offsetToUse];
 //        [self updateWithProgress:progress];
         return;

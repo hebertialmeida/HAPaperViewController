@@ -25,8 +25,6 @@
 {
     // We could have multiple section stacks and find the right one,
     HACollectionViewLargeLayout *largeLayout = [[HACollectionViewLargeLayout alloc] init];
-
-    
     HAPaperCollectionViewController *nextCollectionViewController = [[HAPaperCollectionViewController alloc] initWithCollectionViewLayout:largeLayout];
     
     nextCollectionViewController.useLayoutToLayoutNavigationTransitions = YES;
