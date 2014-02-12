@@ -23,10 +23,10 @@
     return self;
 }
 
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
-{
-    return YES;
-}
+//- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
+//{
+//    return YES;
+//}
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {

@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A1B02C018A9D08F000DE3F8 /* TLTransitionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02BD18A9D08F000DE3F8 /* TLTransitionLayout.m */; };
-		1A1B02C118A9D08F000DE3F8 /* UICollectionView+TLTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02BF18A9D08F000DE3F8 /* UICollectionView+TLTransitioning.m */; };
+		1A1B02CB18AAF00D000DE3F8 /* HAPaperCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02CA18AAF00D000DE3F8 /* HAPaperCollectionViewController.m */; };
+		1A1B02D918AAF0B9000DE3F8 /* HATransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02D318AAF0B9000DE3F8 /* HATransitionController.m */; };
+		1A1B02DA18AAF0B9000DE3F8 /* HATransitionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02D518AAF0B9000DE3F8 /* HATransitionLayout.m */; };
+		1A1B02DF18AAF68A000DE3F8 /* HASmallCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B02DE18AAF68A000DE3F8 /* HASmallCollectionViewController.m */; };
 		1AA0CC1918A07EBC008F50F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC1818A07EBC008F50F6 /* Foundation.framework */; };
 		1AA0CC1B18A07EBC008F50F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC1A18A07EBC008F50F6 /* CoreGraphics.framework */; };
 		1AA0CC1D18A07EBC008F50F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC1C18A07EBC008F50F6 /* UIKit.framework */; };
@@ -38,10 +40,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A1B02BC18A9D08F000DE3F8 /* TLTransitionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTransitionLayout.h; sourceTree = "<group>"; };
-		1A1B02BD18A9D08F000DE3F8 /* TLTransitionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTransitionLayout.m; sourceTree = "<group>"; };
-		1A1B02BE18A9D08F000DE3F8 /* UICollectionView+TLTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+TLTransitioning.h"; sourceTree = "<group>"; };
-		1A1B02BF18A9D08F000DE3F8 /* UICollectionView+TLTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+TLTransitioning.m"; sourceTree = "<group>"; };
+		1A1B02C918AAF00D000DE3F8 /* HAPaperCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAPaperCollectionViewController.h; sourceTree = "<group>"; };
+		1A1B02CA18AAF00D000DE3F8 /* HAPaperCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAPaperCollectionViewController.m; sourceTree = "<group>"; };
+		1A1B02D218AAF0B9000DE3F8 /* HATransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATransitionController.h; sourceTree = "<group>"; };
+		1A1B02D318AAF0B9000DE3F8 /* HATransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATransitionController.m; sourceTree = "<group>"; };
+		1A1B02D418AAF0B9000DE3F8 /* HATransitionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATransitionLayout.h; sourceTree = "<group>"; };
+		1A1B02D518AAF0B9000DE3F8 /* HATransitionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATransitionLayout.m; sourceTree = "<group>"; };
+		1A1B02DD18AAF68A000DE3F8 /* HASmallCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HASmallCollectionViewController.h; sourceTree = "<group>"; };
+		1A1B02DE18AAF68A000DE3F8 /* HASmallCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HASmallCollectionViewController.m; sourceTree = "<group>"; };
 		1AA0CC1518A07EBC008F50F6 /* Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA0CC1818A07EBC008F50F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AA0CC1A18A07EBC008F50F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +97,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1B02C818AAEF83000DE3F8 /* Custom Layout */ = {
+			isa = PBXGroup;
+			children = (
+				1AFA136B18A11E2400F2D2BF /* HACollectionViewSmallLayout.h */,
+				1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */,
+				1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */,
+				1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */,
+			);
+			name = "Custom Layout";
+			sourceTree = "<group>";
+		};
+		1A1B02DB18AAF0C0000DE3F8 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				1A1B02D218AAF0B9000DE3F8 /* HATransitionController.h */,
+				1A1B02D318AAF0B9000DE3F8 /* HATransitionController.m */,
+				1A1B02D418AAF0B9000DE3F8 /* HATransitionLayout.h */,
+				1A1B02D518AAF0B9000DE3F8 /* HATransitionLayout.m */,
+			);
+			name = Transition;
+			sourceTree = "<group>";
+		};
+		1A1B02DC18AAF630000DE3F8 /* Base Colection */ = {
+			isa = PBXGroup;
+			children = (
+				1A1B02C918AAF00D000DE3F8 /* HAPaperCollectionViewController.h */,
+				1A1B02CA18AAF00D000DE3F8 /* HAPaperCollectionViewController.m */,
+			);
+			name = "Base Colection";
+			sourceTree = "<group>";
+		};
 		1AA0CC0C18A07EBC008F50F6 = {
 			isa = PBXGroup;
 			children = (
@@ -126,17 +163,14 @@
 			children = (
 				1AA0CC2718A07EBC008F50F6 /* HAAppDelegate.h */,
 				1AA0CC2818A07EBC008F50F6 /* HAAppDelegate.m */,
-				1AA0CC2A18A07EBC008F50F6 /* Main.storyboard */,
 				1AA0CC2D18A07EBC008F50F6 /* HAViewController.h */,
 				1AA0CC2E18A07EBC008F50F6 /* HAViewController.m */,
-				1AFA136B18A11E2400F2D2BF /* HACollectionViewSmallLayout.h */,
-				1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */,
-				1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */,
-				1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */,
-				1A1B02BC18A9D08F000DE3F8 /* TLTransitionLayout.h */,
-				1A1B02BD18A9D08F000DE3F8 /* TLTransitionLayout.m */,
-				1A1B02BE18A9D08F000DE3F8 /* UICollectionView+TLTransitioning.h */,
-				1A1B02BF18A9D08F000DE3F8 /* UICollectionView+TLTransitioning.m */,
+				1A1B02DD18AAF68A000DE3F8 /* HASmallCollectionViewController.h */,
+				1A1B02DE18AAF68A000DE3F8 /* HASmallCollectionViewController.m */,
+				1A1B02DC18AAF630000DE3F8 /* Base Colection */,
+				1A1B02DB18AAF0C0000DE3F8 /* Transition */,
+				1A1B02C818AAEF83000DE3F8 /* Custom Layout */,
+				1AA0CC2A18A07EBC008F50F6 /* Main.storyboard */,
 				1AA0CC3018A07EBC008F50F6 /* Images.xcassets */,
 				1AA0CC1F18A07EBC008F50F6 /* Supporting Files */,
 			);
@@ -270,13 +304,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1B02D918AAF0B9000DE3F8 /* HATransitionController.m in Sources */,
 				1AA0CC2F18A07EBC008F50F6 /* HAViewController.m in Sources */,
 				1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */,
-				1A1B02C118A9D08F000DE3F8 /* UICollectionView+TLTransitioning.m in Sources */,
-				1A1B02C018A9D08F000DE3F8 /* TLTransitionLayout.m in Sources */,
+				1A1B02CB18AAF00D000DE3F8 /* HAPaperCollectionViewController.m in Sources */,
 				1AA0CC2518A07EBC008F50F6 /* main.m in Sources */,
+				1A1B02DA18AAF0B9000DE3F8 /* HATransitionLayout.m in Sources */,
 				1AA0CC2918A07EBC008F50F6 /* HAAppDelegate.m in Sources */,
 				1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */,
+				1A1B02DF18AAF68A000DE3F8 /* HASmallCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

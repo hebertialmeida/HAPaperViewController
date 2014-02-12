@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Heberti Almeida. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "HAAppDelegate.h"
 

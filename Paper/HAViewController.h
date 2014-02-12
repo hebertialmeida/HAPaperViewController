@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Heberti Almeida. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface HAViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate/*, UIViewControllerTransitioningDelegate*/>
 

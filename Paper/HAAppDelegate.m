@@ -7,14 +7,85 @@
 //
 
 #import "HAAppDelegate.h"
+#import "HATransitionController.h"
+#import "HACollectionViewSmallLayout.h"
+#import "HASmallCollectionViewController.h"
+
+@interface HAAppDelegate () <UINavigationControllerDelegate, HATransitionControllerDelegate>
+
+@property (nonatomic) UINavigationController *navigationController;
+@property (nonatomic) HATransitionController *transitionController;
+
+@end
+
 
 @implementation HAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    HACollectionViewSmallLayout *smallLayout = [[HACollectionViewSmallLayout alloc] init];
+    HASmallCollectionViewController *collectionViewController = [[HASmallCollectionViewController alloc] initWithCollectionViewLayout:smallLayout];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:collectionViewController];
+    self.navigationController.delegate = self;
+    self.navigationController.navigationBarHidden = YES;
+    
+    self.transitionController = [[HATransitionController alloc] initWithCollectionView:collectionViewController.collectionView];
+    self.transitionController.delegate = self;
+    
+    self.window.rootViewController = self.navigationController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
+
+
+- (void)interactionBeganAtPoint:(CGPoint)point
+{
+    // Very basic communication between the transition controller and the top view controller
+    // It would be easy to add more control, support pop, push or no-op
+    HASmallCollectionViewController *presentingVC = (HASmallCollectionViewController *)[self.navigationController topViewController];
+    HASmallCollectionViewController *presentedVC = (HASmallCollectionViewController *)[presentingVC nextViewControllerAtPoint:point];
+    if (presentedVC!=nil)
+    {
+        [self.navigationController pushViewController:presentedVC animated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+- (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
+                          interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController
+{
+    if (animationController==self.transitionController) {
+        return self.transitionController;
+    }
+    return nil;
+}
+
+
+- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                fromViewController:(UIViewController *)fromVC
+                                                  toViewController:(UIViewController *)toVC
+{
+    if (![fromVC isKindOfClass:[UICollectionViewController class]] || ![toVC isKindOfClass:[UICollectionViewController class]])
+    {
+        return nil;
+    }
+    if (!self.transitionController.hasActiveInteraction)
+    {
+        return nil;
+    }
+    
+    self.transitionController.navigationOperation = operation;
+    return self.transitionController;
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
