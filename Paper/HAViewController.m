@@ -10,6 +10,8 @@
 #import "HACollectionViewSmallLayout.h"
 #import "HACollectionViewLargeLayout.h"
 
+#define kTransitionSpeed 0.02f
+#define kLargeLayoutScale 2.5F
 
 @interface HAViewController ()
 
@@ -20,7 +22,14 @@
 @property (nonatomic, strong) HACollectionViewLargeLayout *largeLayout;
 @property (nonatomic, strong) HACollectionViewSmallLayout *smallLayout;
 @property (nonatomic, getter=isFullscreen) BOOL fullscreen;
-@property (nonatomic, getter=isTransition) BOOL transition;
+@property (nonatomic, getter=isTransitioning) BOOL transitioning;
+@property (nonatomic, assign) BOOL isZooming;
+@property (nonatomic, assign) CGFloat lastScale;
+
+//@property (strong, nonatomic) TLTransitionLayout *transitionLayout;
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinch;
+@property (nonatomic) CGFloat initialScale;
+
 
 @end
 
@@ -33,17 +42,21 @@
     _galleryImages = @[@"Image", @"Image1", @"Image2", @"Image3", @"Image4"];
     _slide = 0;
     
-    UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
-    [self.collectionView addGestureRecognizer:gesture];
+//    UIPinchGestureRecognizer *gesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didReceivePinchGesture:)];
+//    [_collectionView addGestureRecognizer:gesture];
     
     // Custom layouts
-    self.smallLayout = [[HACollectionViewSmallLayout alloc] init];
-    self.largeLayout = [[HACollectionViewLargeLayout alloc] init];
+    _smallLayout = [[HACollectionViewSmallLayout alloc] init];
+    _largeLayout = [[HACollectionViewLargeLayout alloc] init];
     
-//    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.smallLayout];
-//    [self.collectionView registerClass:[AFCollectionViewCell class] forCellWithReuseIdentifier:ItemIdentifier];
-//    self.collectionView.delegate = self;
-//    self.collectionView.dataSource = self;
+
+//    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+//    [_collectionView addGestureRecognizer:pinchGestureRecognizer];
+    
+//    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_smallLayout];
+//    [_collectionView registerClass:[AFCollectionViewCell class] forCellWithReuseIdentifier:ItemIdentifier];
+//    _collectionView.delegate = self;
+//    _collectionView.dataSource = self;
     
     _collectionView.collectionViewLayout = _smallLayout;
     _collectionView.clipsToBounds = NO;
@@ -70,8 +83,6 @@
     // ImageView on top
     _topImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
     _reflected = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_topImage.bounds), 320, 320)];
-//    _topImage.contentMode = UIViewContentModeScaleAspectFill;
-//    _reflected.contentMode = UIViewContentModeScaleAspectFill;
     [_mainView addSubview:_topImage];
     [_mainView addSubview:_reflected];
     
@@ -162,7 +173,8 @@
 
 
 #pragma mark - Hide StatusBar
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 
@@ -186,6 +198,9 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.layer.cornerRadius = 4;
     
+//    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleFingerTap:)];
+//    twoFingerTap.numberOfTouchesRequired = 2;
+//    [cell addGestureRecognizer:twoFingerTap];
     
     UIImageView *backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Cell"]];
     cell.backgroundView = backgroundView;
@@ -198,7 +213,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // Start transition
-    _transition = YES;
+    _transitioning = YES;
     
     if (_fullscreen) {
         _fullscreen = NO;
@@ -215,7 +230,7 @@
             // Reset scale
             _mainView.transform = CGAffineTransformMakeScale(1, 1);
         } completion:^(BOOL finished) {
-            _transition = NO;
+            _transitioning = NO;
         }];
     }
     else {
@@ -229,10 +244,9 @@
             _collectionView.backgroundColor = [UIColor blackColor];
             
             // Transform to zoom in effect
-            CGAffineTransform transform = _mainView.transform;
-            _mainView.transform = CGAffineTransformScale(transform, 0.96, 0.96);
+            _mainView.transform = CGAffineTransformScale(_mainView.transform, 0.96, 0.96);
         } completion:^(BOOL finished) {
-            _transition = NO;
+            _transitioning = NO;
         }];
     }
 }
@@ -241,7 +255,7 @@
 #pragma mark - Change slider
 - (void)changeSlide
 {
-    if (_fullscreen == NO && _transition == NO) {
+    if (_fullscreen == NO && _transitioning == NO) {
         if(_slide > _galleryImages.count-1) _slide = 0;
         
         UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
@@ -256,5 +270,101 @@
     }
 }
 
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+#pragma mark - Gesture Interactions
+- (void)doubleFingerTap:(UITapGestureRecognizer *)pinchGestureRecognizer
+{
+    NSLog(@"tap 2 fingers");
+    
+    if ([pinchGestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        [UIView animateWithDuration:0.35 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // Transform to zoom in effect
+            _mainView.transform = CGAffineTransformScale(_mainView.transform, 0.96, 0.96);
+        } completion:^(BOOL finished) {
+            _transitioning = NO;
+        }];
+    } else if ([pinchGestureRecognizer state] == UIGestureRecognizerStateEnded) {
+        // Reset scale
+        _mainView.transform = CGAffineTransformMakeScale(1, 1);
+    }
+}
+
+
+//- (void)handlePinch:(UIPinchGestureRecognizer *)pinch
+//{
+//    if (pinch.state == UIGestureRecognizerStateBegan && !_transitionLayout) {
+//        NSLog(@"UIGestureRecognizerStateBegan");
+//        
+//        // remember initial scale factor for progress calculation
+//        _initialScale = pinch.scale;
+//        
+//        UICollectionViewLayout *toLayout = _smallLayout == _collectionView.collectionViewLayout ? _largeLayout : _smallLayout;
+//        
+//        if (toLayout == _smallLayout) {
+//            _collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
+//        } else {
+//            _collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+//        }
+//        
+//        _transitionLayout = (TLTransitionLayout *)[_collectionView startInteractiveTransitionToCollectionViewLayout:toLayout completion:^(BOOL completed, BOOL finish) {
+//            if (finish) {
+//                _collectionView.contentOffset = _transitionLayout.toContentOffset;
+//            } else {
+//                _collectionView.contentOffset = _transitionLayout.fromContentOffset;
+//            }
+//            self.transitionLayout = nil;
+//        }];
+//        
+////        NSArray *visibleIndexPaths = [_collectionView indexPathsForVisibleItems];
+//        NSArray *visiblePoses = [_collectionView.collectionViewLayout layoutAttributesForElementsInRect:_collectionView.bounds];
+//        NSMutableArray *visibleIndexPaths = [NSMutableArray arrayWithCapacity:visiblePoses.count];
+//        for (UICollectionViewLayoutAttributes *pose in visiblePoses) {
+//            [visibleIndexPaths addObject:pose.indexPath];
+//        }
+//        _transitionLayout.toContentOffset = [_collectionView toContentOffsetForLayout:_transitionLayout indexPaths:visibleIndexPaths placement:TLTransitionLayoutIndexPathPlacementCenter];
+//        
+//    }
+//    
+//    else if (pinch.state == UIGestureRecognizerStateChanged && _transitionLayout && pinch.numberOfTouches > 1) {
+//        NSLog(@"UIGestureRecognizerStateChanged");
+//        CGFloat finalScale = _transitionLayout.nextLayout == _largeLayout ? kLargeLayoutScale : 1 / kLargeLayoutScale;
+//        _transitionLayout.transitionProgress = transitionProgress(_initialScale, pinch.scale, finalScale, TLTransitioningEasingLinear);
+//    }
+////    else if (pinch.state == UIGestureRecognizerStateEnded) {
+////    else {
+//    else if (pinch.state == UIGestureRecognizerStateEnded && _transitionLayout) {
+//        NSLog(@"UIGestureRecognizerStateEnded");
+//        if (_transitionLayout.transitionProgress > 0.3) {
+//            [_collectionView finishInteractiveTransition];
+//        } else {
+//            [_collectionView cancelInteractiveTransition];
+//        }
+//        
+//    }
+//    
+//    else {
+//        NSLog(@"UIGestureRecognizerStateCancelled");
+//        return;
+//    }
+//}
+//
+//- (UICollectionViewTransitionLayout *)collectionView:(UICollectionView *)collectionView transitionLayoutForOldLayout:(UICollectionViewLayout *)fromLayout newLayout:(UICollectionViewLayout *)toLayout
+//{
+//    return [[TLTransitionLayout alloc] initWithCurrentLayout:fromLayout nextLayout:toLayout];
+//}
+
+
+//- (CGFloat)transitionRange:(CGFloat)range
+//{
+//    return MAX(MIN((range), 1.0), 0.0);
+//}
+
+
+#pragma mark - UIViewControllerTransitioningDelegate
+- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
+    return 0.3f;
+}
 
 @end
