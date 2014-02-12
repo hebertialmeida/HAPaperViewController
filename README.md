@@ -7,8 +7,11 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 
 ## Todo
 * Add some shadow
-* Gestures to change layout
+* One finger to change layout
 * Performance improvement
+
+## Required
+* iOS 7
 
 ## Contact me
 
@@ -17,9 +20,13 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 
 * Contact: [hebertialmeida@gmail.com][1]
 * Twitter: [http://twitter.com/hebertialmeida][2] 
+* LinkedIn: [http://www.linkedin.com/in/hebertialmeida][3] 
 
   [1]: mailto:hebertialmeida@gmail.com
   [2]: http://twitter.com/hebertialmeida
+  [3]: http://www.linkedin.com/in/hebertialmeida 
+
+  
 
 
 ## License
