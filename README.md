@@ -10,8 +10,9 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 * One finger to change layout
 * Performance improvement
 
-## Required
-* iOS 7
+## Requirements
+* iOS 7 or higher
+* ARC
 
 ## Contact me
 
