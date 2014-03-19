@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1B6696CB-B101-4B51-851A-0616A4DBD7DE</string>
+	<string>71F792C1-2C5E-46D1-85FD-9C44A5A651E9</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Paper</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>04211EB3-F258-4C27-9FEA-04EAF637D2CD</key>
-		<string>https://github.com/hebertialmeida/HAPaperViewController.git</string>
+		<key>91341745-CAB9-4968-8150-92224CEC3C3F</key>
+		<string>https://github.com/xhzengAIB/HAPaperViewController.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Paper.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>04211EB3-F258-4C27-9FEA-04EAF637D2CD</key>
+		<key>91341745-CAB9-4968-8150-92224CEC3C3F</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/hebertialmeida/HAPaperViewController.git</string>
+	<string>https://github.com/xhzengAIB/HAPaperViewController.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>04211EB3-F258-4C27-9FEA-04EAF637D2CD</string>
+	<string>91341745-CAB9-4968-8150-92224CEC3C3F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>04211EB3-F258-4C27-9FEA-04EAF637D2CD</string>
+			<string>91341745-CAB9-4968-8150-92224CEC3C3F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Paper</string>
+			<string>HAPaperViewController</string>
 		</dict>
 	</array>
 </dict>
