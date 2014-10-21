@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
+#import "HAStickyHeaderLayout.h"
 
-@interface HACollectionViewLargeLayout : UICollectionViewFlowLayout
+@interface HACollectionViewLargeLayout : HAStickyHeaderLayout
 
 @end

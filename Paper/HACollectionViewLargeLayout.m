@@ -14,14 +14,27 @@
 {
     if (!(self = [super init])) return nil;
     
-    self.itemSize = CGSizeMake(CGRectGetWidth([[UIScreen mainScreen] bounds]), CGRectGetHeight([[UIScreen mainScreen] bounds]));
-    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.minimumInteritemSpacing = 10.0f;
-    self.minimumLineSpacing = 4.0f;
-    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    [self setup];
     
     return self;
 }
+
+-(void)awakeFromNib{
+    
+    [self setup];
+}
+
+
+- (void)setup {
+    self.itemSize = [UIScreen mainScreen].bounds.size;
+    self.sectionInset = UIEdgeInsetsMake(0, -[UIScreen mainScreen].bounds.size.width, 0, 0);
+    self.minimumInteritemSpacing = 10.0f;
+    self.minimumLineSpacing = 4.0f;
+    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.headerReferenceSize = [UIScreen mainScreen].bounds.size ;
+    self.collectionView.pagingEnabled = YES;
+}
+
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
 {
@@ -49,5 +62,15 @@
     }
     return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
 }
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForSupplementaryViewOfKind:kind atIndexPath:indexPath];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        attributes.zIndex = -2;
+    }
+    return attributes;
+}
+
+
 
 @end
