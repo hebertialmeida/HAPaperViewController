@@ -10,29 +10,29 @@
 	<string>Paper</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>91341745-CAB9-4968-8150-92224CEC3C3F</key>
+		<key>82993CBC00D95B35FF12724787CF9820B327ED66</key>
 		<string>https://github.com/xhzengAIB/HAPaperViewController.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Paper.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>91341745-CAB9-4968-8150-92224CEC3C3F</key>
+		<key>82993CBC00D95B35FF12724787CF9820B327ED66</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/xhzengAIB/HAPaperViewController.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>91341745-CAB9-4968-8150-92224CEC3C3F</string>
+	<string>82993CBC00D95B35FF12724787CF9820B327ED66</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>91341745-CAB9-4968-8150-92224CEC3C3F</string>
+			<string>82993CBC00D95B35FF12724787CF9820B327ED66</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HAPaperViewController</string>
 		</dict>

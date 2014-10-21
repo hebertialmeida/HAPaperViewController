@@ -27,6 +27,7 @@
 		1AA0CC4418A07EBC008F50F6 /* PaperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC4318A07EBC008F50F6 /* PaperTests.m */; };
 		1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */; };
 		1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */; };
+		877D9F9C19F6418300489582 /* HAStickyHeaderLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 877D9F9B19F6418300489582 /* HAStickyHeaderLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewSmallLayout.m; sourceTree = "<group>"; };
 		1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewLargeLayout.h; sourceTree = "<group>"; };
 		1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewLargeLayout.m; sourceTree = "<group>"; };
+		877D9F9A19F6418300489582 /* HAStickyHeaderLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAStickyHeaderLayout.h; sourceTree = "<group>"; };
+		877D9F9B19F6418300489582 /* HAStickyHeaderLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAStickyHeaderLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 		1A1B02C818AAEF83000DE3F8 /* Custom Layout */ = {
 			isa = PBXGroup;
 			children = (
+				877D9F9A19F6418300489582 /* HAStickyHeaderLayout.h */,
+				877D9F9B19F6418300489582 /* HAStickyHeaderLayout.m */,
 				1AFA136B18A11E2400F2D2BF /* HACollectionViewSmallLayout.h */,
 				1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */,
 				1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */,
@@ -304,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877D9F9C19F6418300489582 /* HAStickyHeaderLayout.m in Sources */,
 				1A1B02D918AAF0B9000DE3F8 /* HATransitionController.m in Sources */,
 				1AA0CC2F18A07EBC008F50F6 /* HAViewController.m in Sources */,
 				1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */,
