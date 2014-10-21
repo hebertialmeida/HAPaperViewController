@@ -1,14 +1,16 @@
 HAPaperViewController
 =====================
 
-UICollectionView with layout transitions inspired by Facebook Paper App
+This is Extension Of HAPaper
+
+Added features:
+ - Storyboard support
+ - Navigation controller support (can be pushed, popped)
+ - The header handles user interactions
+
 
 ![Demo HAPaperViewController](https://raw.github.com/hebertialmeida/HAPaperViewController/master/Paper/Images.xcassets/paper.gif)
 
-## Todo
-* Add some shadow
-* One finger to change layout
-* Performance improvement
 
 ## Requirements
 * iOS 7 or higher
@@ -16,16 +18,12 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 
 ## Contact me
 
-**Heberti Almeida**  
+**Istvan Balogh**  
 
 
-* Contact: [hebertialmeida@gmail.com][1]
-* Twitter: [http://twitter.com/hebertialmeida][2] 
-* LinkedIn: [http://www.linkedin.com/in/hebertialmeida][3] 
+* Contact: [steven851007@gmail.com][1]
 
-  [1]: mailto:hebertialmeida@gmail.com
-  [2]: http://twitter.com/hebertialmeida
-  [3]: http://www.linkedin.com/in/hebertialmeida 
+  [1]: mailto:steven851007@gmail.com
 
   
 
@@ -34,7 +32,7 @@ UICollectionView with layout transitions inspired by Facebook Paper App
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Heberti Almeida
+Copyright (c) 2014 Istvan Balogh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
