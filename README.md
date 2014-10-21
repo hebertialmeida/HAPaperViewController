@@ -1,7 +1,7 @@
 HAPaperViewController
 =====================
 
-This is Extension Of HAPaper
+This is Extension Of HAPaperViewController
 
 Added features:
  - Storyboard support
