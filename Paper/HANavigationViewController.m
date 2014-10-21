@@ -42,7 +42,6 @@
         self.transitionController = [[HATransitionController alloc] initWithCollectionView:collectionViewController.collectionView];
         self.transitionController.delegate = self;
     }
-    NSLog(@"Will show : %@", self.viewControllers);
 }
 
 -(UIViewController *)popViewControllerAnimated:(BOOL)animated{
@@ -51,8 +50,6 @@
         
         self.transitionController = nil;
     }
-    
-    NSLog(@"Pop : %@", self.viewControllers);
     
     return [super popViewControllerAnimated:animated];
 }
