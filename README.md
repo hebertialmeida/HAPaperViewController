@@ -6,7 +6,7 @@ This is Extension Of HAPaperViewController
 Added features:
  - Storyboard support
  - Navigation controller support (can be pushed, popped)
- - The header handles user interactions
+ - The header handles user interactions (Page view controller included)
 
 
 ![Demo HAPaperViewController](https://raw.github.com/hebertialmeida/HAPaperViewController/master/Paper/Images.xcassets/paper.gif)
