@@ -27,8 +27,9 @@
     
     [super viewDidLoad];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CELL_ID];
-    [self.collectionView setBackgroundColor:[UIColor clearColor]];
-
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.topItem.title = @"";
+    
     [self.collectionView registerNib:[UINib nibWithNibName:NIB_NAME_HEADER bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 
     [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -92,7 +93,7 @@
                                                     withReuseIdentifier:@"header"
                                                            forIndexPath:indexPath];
         __weak __typeof__(self) weakSelf = self;
-        self.header.didPagControllerChanged = ^(int newPageIndex){
+        self.header.didPagControllerChanged = ^(NSInteger newPageIndex){
             
             weakSelf.count = arc4random_uniform(20) + 3;
             [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];

@@ -72,17 +72,17 @@
     [self.subTitleLabel.layer setShadowOpacity:0.6];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     CGFloat pageWidth = scrollView.frame.size.width;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
-    NSInteger page = lround(fractionalPage);
-    if (self.pageControl.currentPage != page) {
-        self.reflectedImage.image = [self.imageViews[page] image];
-        self.pageControl.currentPage = page;
+    NSInteger newPage = lround(fractionalPage);
+    if (self.pageControl.currentPage != newPage) {
+        self.reflectedImage.image = [self.imageViews[newPage] image];
+        self.pageControl.currentPage = newPage;
         
         if (self.didPagControllerChanged) {
-            self.didPagControllerChanged(page);
+            self.didPagControllerChanged(newPage);
         }
     }
 }

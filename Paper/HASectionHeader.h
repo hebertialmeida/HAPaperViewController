@@ -12,6 +12,6 @@
 
 @interface HASectionHeader : UICollectionViewCell
 
-@property (nonatomic, copy) void (^didPagControllerChanged)(int newPageIndex);
+@property (nonatomic, copy) void (^didPagControllerChanged)(NSInteger newPageIndex);
 
 @end
