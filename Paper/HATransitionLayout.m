@@ -43,10 +43,18 @@ static NSString *kOffsetV = @"offsetV";
     
     for (UICollectionViewLayoutAttributes *currentAttribute in attributes)
     {
-        CGPoint currentCenter = currentAttribute.center;
-        CGPoint updatedCenter = CGPointMake(currentCenter.x, currentCenter.y + self.offset.vertical);
-        currentAttribute.center = updatedCenter;
+        if (currentAttribute.representedElementCategory != UICollectionElementCategorySupplementaryView) {
+            CGPoint currentCenter = currentAttribute.center;
+            CGPoint updatedCenter = CGPointMake(currentCenter.x, currentCenter.y + self.offset.vertical);
+            currentAttribute.center = updatedCenter;
+        }
+        
+        if (currentAttribute.representedElementCategory == UICollectionElementCategorySupplementaryView) {
+            currentAttribute.frame = self.collectionView.bounds;
+        }
+
     }
+
     return attributes;
 }
 

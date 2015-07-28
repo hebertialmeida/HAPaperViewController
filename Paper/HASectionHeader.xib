@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1eT-rW-DvV" customClass="HASectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="crf-4I-a7y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="314"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="TM8-It-buS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="hTZ-hM-82H"/>
+                                    <constraint firstAttribute="height" constant="314" id="lrH-Fp-qhs"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image1" translatesAutoresizingMaskIntoConstraints="NO" id="qBu-2s-Zxn">
+                                <rect key="frame" x="320" y="0.0" width="320" height="314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="TTS-6K-8Ag"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image2" translatesAutoresizingMaskIntoConstraints="NO" id="HVN-aO-zVS">
+                                <rect key="frame" x="640" y="0.0" width="320" height="314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="ftx-mq-d2O"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image3" translatesAutoresizingMaskIntoConstraints="NO" id="Ef1-cH-QSw">
+                                <rect key="frame" x="960" y="0.0" width="320" height="314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="O4J-11-dyr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heberti Almeida &amp; Istvan Balogh" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3AQ-Wm-NQf">
+                                <rect key="frame" x="16" y="98" width="200" height="15.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="58w-gZ-q3O">
+                                <rect key="frame" x="16" y="122" width="242.5" height="30"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-A5-XzX">
+                                <rect key="frame" x="16" y="64" width="62" height="26.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="TM8-It-buS" secondAttribute="bottom" id="3ie-Ad-UVW"/>
+                            <constraint firstItem="qBu-2s-Zxn" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="top" id="4H3-Pj-ENh"/>
+                            <constraint firstItem="TM8-It-buS" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="top" id="6Ib-d1-vh8"/>
+                            <constraint firstItem="58w-gZ-q3O" firstAttribute="leading" secondItem="Yy0-A5-XzX" secondAttribute="leading" id="HjY-Je-u1b"/>
+                            <constraint firstAttribute="bottom" secondItem="Ef1-cH-QSw" secondAttribute="bottom" id="KcE-T3-XDc"/>
+                            <constraint firstItem="TM8-It-buS" firstAttribute="leading" secondItem="crf-4I-a7y" secondAttribute="leading" id="Kl4-pR-oSB"/>
+                            <constraint firstAttribute="trailing" secondItem="Ef1-cH-QSw" secondAttribute="trailing" id="OYR-AC-UAc"/>
+                            <constraint firstItem="3AQ-Wm-NQf" firstAttribute="top" secondItem="Yy0-A5-XzX" secondAttribute="bottom" constant="8" id="ase-P3-144"/>
+                            <constraint firstAttribute="height" constant="314" id="b3V-fJ-lTi"/>
+                            <constraint firstItem="Yy0-A5-XzX" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="top" constant="64" id="f6d-Ze-6tl"/>
+                            <constraint firstAttribute="bottom" secondItem="qBu-2s-Zxn" secondAttribute="bottom" id="gkC-za-fru"/>
+                            <constraint firstItem="58w-gZ-q3O" firstAttribute="top" secondItem="3AQ-Wm-NQf" secondAttribute="bottom" constant="8" id="hFU-Tc-cvk"/>
+                            <constraint firstItem="TM8-It-buS" firstAttribute="height" secondItem="qBu-2s-Zxn" secondAttribute="height" id="hZW-EV-YLb"/>
+                            <constraint firstItem="Ef1-cH-QSw" firstAttribute="leading" secondItem="HVN-aO-zVS" secondAttribute="trailing" id="kQQ-7p-Rhl"/>
+                            <constraint firstItem="HVN-aO-zVS" firstAttribute="leading" secondItem="qBu-2s-Zxn" secondAttribute="trailing" id="oIl-Tf-yGR"/>
+                            <constraint firstItem="HVN-aO-zVS" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="top" id="q3o-S7-967"/>
+                            <constraint firstItem="Ef1-cH-QSw" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="top" id="qme-4s-39g"/>
+                            <constraint firstItem="Yy0-A5-XzX" firstAttribute="leading" secondItem="crf-4I-a7y" secondAttribute="leading" constant="16" id="qnR-B8-juL"/>
+                            <constraint firstItem="3AQ-Wm-NQf" firstAttribute="leading" secondItem="Yy0-A5-XzX" secondAttribute="leading" id="wXx-lz-6A4"/>
+                            <constraint firstItem="Ef1-cH-QSw" firstAttribute="leading" secondItem="HVN-aO-zVS" secondAttribute="trailing" id="yLh-e5-KqV"/>
+                            <constraint firstAttribute="bottom" secondItem="HVN-aO-zVS" secondAttribute="bottom" id="zTy-D1-XuT"/>
+                            <constraint firstItem="qBu-2s-Zxn" firstAttribute="leading" secondItem="TM8-It-buS" secondAttribute="trailing" id="zmb-5Z-GpO"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="1eT-rW-DvV" id="mBG-Ex-vra"/>
+                        </connections>
+                    </scrollView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwN-0y-Dae">
+                        <rect key="frame" x="0.0" y="314" width="320" height="254"/>
+                    </imageView>
+                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="3Mi-e7-Bu3">
+                        <rect key="frame" x="132" y="266" width="55" height="37"/>
+                    </pageControl>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="fwN-0y-Dae" firstAttribute="top" secondItem="crf-4I-a7y" secondAttribute="bottom" id="3xt-ux-1eS"/>
+                <constraint firstAttribute="trailing" secondItem="crf-4I-a7y" secondAttribute="trailing" id="4IX-23-eyM"/>
+                <constraint firstItem="fwN-0y-Dae" firstAttribute="top" secondItem="3Mi-e7-Bu3" secondAttribute="bottom" constant="11" id="BxR-Zk-vsc"/>
+                <constraint firstAttribute="trailing" secondItem="fwN-0y-Dae" secondAttribute="trailing" id="FSD-Dd-clI"/>
+                <constraint firstAttribute="bottom" secondItem="fwN-0y-Dae" secondAttribute="bottom" id="H6F-iB-erK"/>
+                <constraint firstItem="crf-4I-a7y" firstAttribute="leading" secondItem="1eT-rW-DvV" secondAttribute="leading" id="MAo-ss-ya2"/>
+                <constraint firstItem="crf-4I-a7y" firstAttribute="top" secondItem="1eT-rW-DvV" secondAttribute="top" id="e6M-qT-TDH"/>
+                <constraint firstAttribute="centerX" secondItem="3Mi-e7-Bu3" secondAttribute="centerX" id="m0y-tB-Ah5"/>
+                <constraint firstItem="fwN-0y-Dae" firstAttribute="leading" secondItem="1eT-rW-DvV" secondAttribute="leading" id="mfA-jj-ESF"/>
+            </constraints>
+            <size key="customSize" width="320" height="200"/>
+            <connections>
+                <outlet property="logoLabel" destination="Yy0-A5-XzX" id="fxk-d6-Tnt"/>
+                <outlet property="pageControl" destination="3Mi-e7-Bu3" id="IKE-a1-OMy"/>
+                <outlet property="reflectedImage" destination="fwN-0y-Dae" id="Tyx-NH-jBZ"/>
+                <outlet property="scrollView" destination="crf-4I-a7y" id="Alb-vR-lNw"/>
+                <outlet property="subTitleLabel" destination="58w-gZ-q3O" id="7zl-Xd-f7g"/>
+                <outlet property="titleLabel" destination="3AQ-Wm-NQf" id="ahb-9Z-Wqv"/>
+                <outletCollection property="imageViews" destination="TM8-It-buS" id="QaJ-ls-8IT"/>
+                <outletCollection property="imageViews" destination="qBu-2s-Zxn" id="27H-E5-1qw"/>
+                <outletCollection property="imageViews" destination="HVN-aO-zVS" id="rT9-b0-VCy"/>
+                <outletCollection property="imageViews" destination="Ef1-cH-QSw" id="bh8-OM-OCZ"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Image" width="306" height="306"/>
+        <image name="Image1" width="320" height="320"/>
+        <image name="Image2" width="306" height="306"/>
+        <image name="Image3" width="306" height="306"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
