@@ -8,9 +8,7 @@ Added features:
  - Navigation controller support (can be pushed, popped)
  - The header handles user interactions (Page view controller included)
 
-
 ![Demo HAPaperViewController](https://raw.github.com/hebertialmeida/HAPaperViewController/master/Paper/Images.xcassets/paper.gif)
-
 
 ## Requirements
 * iOS 7 or higher
@@ -18,12 +16,15 @@ Added features:
 
 ## Contact me
 
-**Istvan Balogh**  
+**Heberti Almeida**  
 
+* Contact: [hebertialmeida@gmail.com][1]
+* Twitter: [http://twitter.com/hebertialmeida][2] 
+* LinkedIn: [http://www.linkedin.com/in/hebertialmeida][3] 
 
-* Contact: [steven851007@gmail.com][1]
-
-  [1]: mailto:steven851007@gmail.com
+  [1]: mailto:hebertialmeida@gmail.com
+  [2]: http://twitter.com/hebertialmeida
+  [3]: http://www.linkedin.com/in/hebertialmeida
 
   
 
