@@ -18,7 +18,6 @@
 		1AA0CC2518A07EBC008F50F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC2418A07EBC008F50F6 /* main.m */; };
 		1AA0CC2918A07EBC008F50F6 /* HAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC2818A07EBC008F50F6 /* HAAppDelegate.m */; };
 		1AA0CC2C18A07EBC008F50F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA0CC2A18A07EBC008F50F6 /* Main.storyboard */; };
-		1AA0CC2F18A07EBC008F50F6 /* HAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC2E18A07EBC008F50F6 /* HAViewController.m */; };
 		1AA0CC3118A07EBC008F50F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA0CC3018A07EBC008F50F6 /* Images.xcassets */; };
 		1AA0CC3818A07EBC008F50F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC3718A07EBC008F50F6 /* XCTest.framework */; };
 		1AA0CC3918A07EBC008F50F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA0CC1818A07EBC008F50F6 /* Foundation.framework */; };
@@ -63,8 +62,6 @@
 		1AA0CC2718A07EBC008F50F6 /* HAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HAAppDelegate.h; sourceTree = "<group>"; };
 		1AA0CC2818A07EBC008F50F6 /* HAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HAAppDelegate.m; sourceTree = "<group>"; };
 		1AA0CC2B18A07EBC008F50F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1AA0CC2D18A07EBC008F50F6 /* HAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HAViewController.h; sourceTree = "<group>"; };
-		1AA0CC2E18A07EBC008F50F6 /* HAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HAViewController.m; sourceTree = "<group>"; };
 		1AA0CC3018A07EBC008F50F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1AA0CC3618A07EBC008F50F6 /* PaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA0CC3718A07EBC008F50F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -179,8 +176,6 @@
 				941CB0081B6794C600C0BCFC /* MXKCardsView.m */,
 				1AA0CC2718A07EBC008F50F6 /* HAAppDelegate.h */,
 				1AA0CC2818A07EBC008F50F6 /* HAAppDelegate.m */,
-				1AA0CC2D18A07EBC008F50F6 /* HAViewController.h */,
-				1AA0CC2E18A07EBC008F50F6 /* HAViewController.m */,
 				1A1B02DD18AAF68A000DE3F8 /* HASmallCollectionViewController.h */,
 				1A1B02DE18AAF68A000DE3F8 /* HASmallCollectionViewController.m */,
 				1A1B02DC18AAF630000DE3F8 /* Base Colection */,
@@ -323,7 +318,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1B02D918AAF0B9000DE3F8 /* HATransitionController.m in Sources */,
-				1AA0CC2F18A07EBC008F50F6 /* HAViewController.m in Sources */,
 				1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */,
 				1A1B02CB18AAF00D000DE3F8 /* HAPaperCollectionViewController.m in Sources */,
 				1AA0CC2518A07EBC008F50F6 /* main.m in Sources */,
