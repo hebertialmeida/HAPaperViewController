@@ -44,6 +44,14 @@
         panGestureRecognizer.maximumNumberOfTouches = 1;
         [collectionView addGestureRecognizer:panGestureRecognizer];
         
+        
+        UISwipeGestureRecognizer * rec = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(back:)];
+        
+        rec.direction = UISwipeGestureRecognizerDirectionDown;
+        
+        //[collectionView addGestureRecognizer:rec];
+
+        
         self.collectionView = collectionView;
     }
     return self;
@@ -196,6 +204,16 @@
 
 // action method for our pinch gesture recognizer
 //
+
+-(void)back:(UISwipeGestureRecognizer*)rec{
+    
+
+    if (rec.direction == UISwipeGestureRecognizerDirectionDown) {
+        [self.delegate interactionBeganAtPoint:CGPointMake(0, 0)];
+        //self.navigationController.navigationBarHidden = NO;
+        //[self.navigationController popViewControllerAnimated:YES];
+    }
+}
 - (void)handlePinch:(UIPinchGestureRecognizer *)sender
 {
     // here we want to end the transition interaction if the user stops or finishes the pinch gesture

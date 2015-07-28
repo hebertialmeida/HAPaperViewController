@@ -14,7 +14,7 @@
 {
     if (!(self = [super init])) return nil;
     
-    self.itemSize = CGSizeMake(142, 254);
+    self.itemSize = CGSizeMake(142, 154);
     self.sectionInset = UIEdgeInsetsMake((iPhone5 ? 314 : 224), 2, 0, 2);
     self.minimumInteritemSpacing = 10.0f;
     self.minimumLineSpacing = 2.0f;
@@ -26,6 +26,8 @@
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)oldBounds
 {
     return NO;
+    
+    //[self prepareLayout];
 }
 
 @end

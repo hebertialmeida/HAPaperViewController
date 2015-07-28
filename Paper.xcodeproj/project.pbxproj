@@ -27,6 +27,10 @@
 		1AA0CC4418A07EBC008F50F6 /* PaperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA0CC4318A07EBC008F50F6 /* PaperTests.m */; };
 		1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */; };
 		1AFA137018A11F5D00F2D2BF /* HACollectionViewLargeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */; };
+		941CB0061B6794B400C0BCFC /* MXKCardsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 941CB0051B6794B400C0BCFC /* MXKCardsView.xib */; };
+		941CB0091B6794C600C0BCFC /* MXKCardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0081B6794C600C0BCFC /* MXKCardsView.m */; };
+		944F41461B67B041004568C0 /* cardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 944F41451B67B041004568C0 /* cardCell.xib */; };
+		944F41491B67B05D004568C0 /* MXKCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 944F41481B67B05D004568C0 /* MXKCardCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,12 @@
 		1AFA136C18A11E2400F2D2BF /* HACollectionViewSmallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewSmallLayout.m; sourceTree = "<group>"; };
 		1AFA136E18A11F5D00F2D2BF /* HACollectionViewLargeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HACollectionViewLargeLayout.h; sourceTree = "<group>"; };
 		1AFA136F18A11F5D00F2D2BF /* HACollectionViewLargeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HACollectionViewLargeLayout.m; sourceTree = "<group>"; };
+		941CB0051B6794B400C0BCFC /* MXKCardsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MXKCardsView.xib; sourceTree = "<group>"; };
+		941CB0071B6794C600C0BCFC /* MXKCardsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXKCardsView.h; sourceTree = "<group>"; };
+		941CB0081B6794C600C0BCFC /* MXKCardsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXKCardsView.m; sourceTree = "<group>"; };
+		944F41451B67B041004568C0 /* cardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cardCell.xib; sourceTree = "<group>"; };
+		944F41471B67B05D004568C0 /* MXKCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXKCardCell.h; sourceTree = "<group>"; };
+		944F41481B67B05D004568C0 /* MXKCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXKCardCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +171,12 @@
 		1AA0CC1E18A07EBC008F50F6 /* Paper */ = {
 			isa = PBXGroup;
 			children = (
+				944F41471B67B05D004568C0 /* MXKCardCell.h */,
+				944F41481B67B05D004568C0 /* MXKCardCell.m */,
+				944F41451B67B041004568C0 /* cardCell.xib */,
+				941CB0051B6794B400C0BCFC /* MXKCardsView.xib */,
+				941CB0071B6794C600C0BCFC /* MXKCardsView.h */,
+				941CB0081B6794C600C0BCFC /* MXKCardsView.m */,
 				1AA0CC2718A07EBC008F50F6 /* HAAppDelegate.h */,
 				1AA0CC2818A07EBC008F50F6 /* HAAppDelegate.m */,
 				1AA0CC2D18A07EBC008F50F6 /* HAViewController.h */,
@@ -250,9 +266,9 @@
 		1AA0CC0D18A07EBC008F50F6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = HA;
+				CLASSPREFIX = MXK;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Heberti Almeida";
+				ORGANIZATIONNAME = "Sugar And Candy LLC";
 				TargetAttributes = {
 					1AA0CC3518A07EBC008F50F6 = {
 						TestTargetID = 1AA0CC1418A07EBC008F50F6;
@@ -283,6 +299,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941CB0061B6794B400C0BCFC /* MXKCardsView.xib in Resources */,
+				944F41461B67B041004568C0 /* cardCell.xib in Resources */,
 				1AA0CC3118A07EBC008F50F6 /* Images.xcassets in Resources */,
 				1AA0CC2318A07EBC008F50F6 /* InfoPlist.strings in Resources */,
 				1AA0CC2C18A07EBC008F50F6 /* Main.storyboard in Resources */,
@@ -311,7 +329,9 @@
 				1AA0CC2518A07EBC008F50F6 /* main.m in Sources */,
 				1A1B02DA18AAF0B9000DE3F8 /* HATransitionLayout.m in Sources */,
 				1AA0CC2918A07EBC008F50F6 /* HAAppDelegate.m in Sources */,
+				941CB0091B6794C600C0BCFC /* MXKCardsView.m in Sources */,
 				1AFA136D18A11E2400F2D2BF /* HACollectionViewSmallLayout.m in Sources */,
+				944F41491B67B05D004568C0 /* MXKCardCell.m in Sources */,
 				1A1B02DF18AAF68A000DE3F8 /* HASmallCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
