@@ -8,6 +8,8 @@
 
 #import "HATransitionController.h"
 #import "HATransitionLayout.h"
+#import "HACollectionViewLargeLayout.h"
+
 
 @interface HATransitionController ()
 
@@ -82,6 +84,11 @@
     
     UIView *containerView = [transitionContext containerView];
     [containerView addSubview:[toCollectionViewController view]];
+    
+    id toLayout = toCollectionViewController.collectionViewLayout;
+    if ([toLayout isKindOfClass:[HACollectionViewLargeLayout class]]) {
+        ((HACollectionViewLargeLayout *)toLayout).targetIndexPath = _cellIndexPath;
+    }
     
     self.transitionLayout = (HATransitionLayout *)[fromCollectionViewController.collectionView startInteractiveTransitionToCollectionViewLayout:toCollectionViewController.collectionViewLayout completion:^(BOOL didFinish, BOOL didComplete) {
         [self.context completeTransition:didComplete];

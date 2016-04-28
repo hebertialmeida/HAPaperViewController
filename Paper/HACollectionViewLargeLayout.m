@@ -62,6 +62,13 @@
     }
     return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
 }
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset {
+    if (_targetIndexPath) {
+        return CGPointMake(_targetIndexPath.row * (self.itemSize.width + self.minimumLineSpacing), 0);
+    }
+    
+    return proposedContentOffset;
+}
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForSupplementaryViewOfKind:kind atIndexPath:indexPath];
