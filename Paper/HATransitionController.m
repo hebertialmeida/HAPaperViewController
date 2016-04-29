@@ -8,6 +8,8 @@
 
 #import "HATransitionController.h"
 #import "HATransitionLayout.h"
+#import "HACollectionViewLargeLayout.h"
+
 
 @interface HATransitionController ()
 
@@ -16,6 +18,11 @@
 @property (nonatomic) CGFloat initialPinchDistance;
 @property (nonatomic) CGPoint initialPinchPoint;
 @property (nonatomic) CGFloat initialScale;
+
+@property (nonatomic) NSIndexPath *cellIndexPath;
+@property (nonatomic) BOOL isInitial;
+@property (nonatomic) CGFloat targetY;
+
 
 @end
 
@@ -77,6 +84,11 @@
     
     UIView *containerView = [transitionContext containerView];
     [containerView addSubview:[toCollectionViewController view]];
+    
+    id toLayout = toCollectionViewController.collectionViewLayout;
+    if ([toLayout isKindOfClass:[HACollectionViewLargeLayout class]]) {
+        ((HACollectionViewLargeLayout *)toLayout).targetIndexPath = _cellIndexPath;
+    }
     
     self.transitionLayout = (HATransitionLayout *)[fromCollectionViewController.collectionView startInteractiveTransitionToCollectionViewLayout:toCollectionViewController.collectionViewLayout completion:^(BOOL didFinish, BOOL didComplete) {
         [self.context completeTransition:didComplete];
@@ -207,7 +219,108 @@
         CGPoint point = [sender locationInView:sender.view];
         NSLog(@"point.x %f", point.x);
         NSLog(@"point.y %f", point.y);
+    
+        if (sender.state == UIGestureRecognizerStateEnded)
+        {
+            [self endInteractionWithSuccess:YES];
+        }
+        else if (sender.state == UIGestureRecognizerStateCancelled)
+        {
+            [self endInteractionWithSuccess:NO];
+        }
+        else if (sender.numberOfTouches == 1)
+        {
+            if (sender.state == UIGestureRecognizerStateBegan)
+            {
+                // start the pinch in our out
+                if (!self.hasActiveInteraction)
+                {
+//                    此处的记录可以使得向上拖拽变大时，用来显示最合适的cell，而不只是当前正在拖拽的cell
+                    _cellIndexPath          = [self.collectionView indexPathForItemAtPoint:point];
+                    self.initialPinchPoint = point;
+                    self.isInitial = NO;
+                    self.hasActiveInteraction = YES;    // the transition is in active motion
+                    [self.delegate interactionBeganAtPoint:point];
+                    
+                }
+            }
+            
+            if (self.hasActiveInteraction)
+            {
+                if (sender.state == UIGestureRecognizerStateChanged)
+                {
+                    if (!self.transitionLayout) return;
+                    if (!_isInitial) {
+                        _isInitial = YES;
+                        [self updateInitalDataWithPoint:point];
+                    }
+                    
+                    UIOffset offsetToUse    = self.transitionLayout.offset;
+                    CGFloat  progress       = ABS((point.y - _initialPinchPoint.y)/(_initialPinchPoint.y - _targetY));
+                    
+                    if (self.navigationOperation == UINavigationControllerOperationPush) {
+                        if (point.y < _targetY) {
+                            progress = 1;
+                            offsetToUse.vertical = point.y - _targetY;
+                        }
+                        else if (point.y > _initialPinchPoint.y) {
+                            progress = 0;
+                            offsetToUse.vertical = point.y - _initialPinchPoint.y;
+                        }
+                        
+                    }
+                    else {
+                        if (point.y > _targetY) {
+                            progress = 1;
+                            offsetToUse.vertical = point.y - _targetY;
+                        }
+                        else if (point.y < _initialPinchPoint.y) {
+                            progress = 0;
+                            offsetToUse.vertical = point.y - _initialPinchPoint.y;
+                        }
+                    }
+                    CGPoint translation = [sender translationInView:sender.view];
+                    offsetToUse.horizontal = translation.x;
+                    [self updateWithProgress:progress andOffset:offsetToUse];
+                }
+            }
+        }
+    
 }
+- (void)updateInitalDataWithPoint:(CGPoint)point {
+    id nextLayout = self.transitionLayout.nextLayout;
+    id currentLayout = self.transitionLayout.currentLayout;
+    if ([nextLayout isKindOfClass:[UICollectionViewFlowLayout class]] && [currentLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        
+        CGFloat nextHeight      = ((UICollectionViewFlowLayout *)nextLayout).itemSize.height;
+        CGFloat currentHeight   = ((UICollectionViewFlowLayout *)currentLayout).itemSize.height;
+        CGFloat tallHeight      = MAX(nextHeight, currentHeight);
+        CGFloat hRatio          = (tallHeight - _initialPinchPoint.y) / currentHeight;
+        _targetY                = tallHeight - nextHeight * hRatio;
+    }
+    
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        id layout = self.collectionView.collectionViewLayout;
+        if ([layout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+            CGFloat height = ((UICollectionViewFlowLayout *)layout).itemSize.height;
+            CGPoint point = [gestureRecognizer locationInView:gestureRecognizer.view];
+            CGPoint  translation    = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view];
+            
+            //手指区域在collectionView内
+            //手指是上下滑动
+            if (point.y > self.collectionView.frame.size.height - height && ABS(translation.y) > ABS(translation.x)) {
+                return YES;
+            }
+            return NO;
+        }
+    }
+    return YES;
+}
+
 
 
 @end

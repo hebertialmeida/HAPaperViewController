@@ -10,5 +10,6 @@
 #import "HAStickyHeaderLayout.h"
 
 @interface HACollectionViewLargeLayout : HAStickyHeaderLayout
+@property (nonatomic, strong) NSIndexPath *targetIndexPath;
 
 @end

@@ -45,7 +45,7 @@ static NSString *kOffsetV = @"offsetV";
     {
         if (currentAttribute.representedElementCategory != UICollectionElementCategorySupplementaryView) {
             CGPoint currentCenter = currentAttribute.center;
-            CGPoint updatedCenter = CGPointMake(currentCenter.x, currentCenter.y + self.offset.vertical);
+            CGPoint updatedCenter = CGPointMake(currentCenter.x + self.offset.horizontal, currentCenter.y + self.offset.vertical);
             currentAttribute.center = updatedCenter;
         }
         
