@@ -301,4 +301,26 @@
     
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        id layout = self.collectionView.collectionViewLayout;
+        if ([layout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+            CGFloat height = ((UICollectionViewFlowLayout *)layout).itemSize.height;
+            CGPoint point = [gestureRecognizer locationInView:gestureRecognizer.view];
+            CGPoint  translation    = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view];
+            
+            //手指区域在collectionView内
+            //手指是上下滑动
+            if (point.y > self.collectionView.frame.size.height - height && ABS(translation.y) > ABS(translation.x)) {
+                return YES;
+            }
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+
 @end
